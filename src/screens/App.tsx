@@ -1,12 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
-import './App.css';
+import './css/App.css';
 import { Button, Col, Container, Form, Image, Row, Spinner } from 'react-bootstrap';
-import style from './swap.module.css';
-import { RootStateOrAny, useSelector } from 'react-redux';
-import CoinSelector from './coin-list';
-import { getExchangeRate, getUserBalance, swap } from './graphql';
+import style from './css/swap.module.css';
+import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
+import CoinSelector from './components/coin-list';
+import { getExchangeRate, getUserBalance, swap } from '../graphql';
+import { SCREEN, updateScreen } from '../features/pick-screen/screen-picker';
 
 function App() {
+  const dispatch = useDispatch();
   const [inAmount, setInAmount] = useState<number>(0)
   const [outAmount, setOutAmount] = useState<number>(0)
   const [inBalance, setInBalance] = useState<number>(0)
@@ -74,11 +76,12 @@ function App() {
     setCounter(counter + 1);
   }
 
+
   return (    
     <div className="App">
       <header className="App-header">
       <div>
-        <Image className={`${style['uni-logo']}`} src='https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Uniswap_Logo.svg/1026px-Uniswap_Logo.svg.png?'>
+        <Image className={`${style['uni-logo']} ${style['arrow']}`} onClick={() => {dispatch(updateScreen(SCREEN.DASHBOARD_SCREEN))}} src='https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Uniswap_Logo.svg/1026px-Uniswap_Logo.svg.png?'>
         </Image>
       </div>
 

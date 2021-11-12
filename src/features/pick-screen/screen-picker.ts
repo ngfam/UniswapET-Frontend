@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 export enum SCREEN {
     LOGIN_SCREEN,
     SIGNUP_SCREEN,
-    APP_SCREEN
+    APP_SCREEN,
+    DASHBOARD_SCREEN
 }
 
 export const screenSlice = createSlice({

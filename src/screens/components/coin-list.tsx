@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Form, Dropdown, Col, Row, Image, Container } from "react-bootstrap";
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
-import './App.css';
-import { updateToken } from "./features/pick-token/token-picker";
-import { getTokenSearchList, Token } from "./graphql";
-import style from './swap.module.css';
+import './../css/App.css';
+import { updateToken } from "../../features/pick-token/token-picker";
+import { getTokenSearchList, Token } from "../../graphql";
+import style from './../css/swap.module.css';
 
 export const CoinSelector = (props: any) => {
 

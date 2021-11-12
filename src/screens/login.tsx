@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import '../App.css';
+import './css/App.css';
 import { Button, Col, Form, Image, Row, Spinner } from 'react-bootstrap';
-import style from '../swap.module.css';
+import style from './css/swap.module.css';
 import { useDispatch } from 'react-redux';
 import { SCREEN, updateScreen } from '../features/pick-screen/screen-picker';
 import { login } from '../graphql';

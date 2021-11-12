@@ -1,5 +1,5 @@
 import { ApolloClient, InMemoryCache, gql, createHttpLink } from "@apollo/client";
-import { Token } from "./interfaces";
+import { Token, Pair } from "./interfaces";
 import { setContext } from "@apollo/client/link/context";
 
 export * from './interfaces';
@@ -54,6 +54,43 @@ export async function getTokenSearchList(text: string = ""): Promise<Token[]> {
     return results;
 }
 
+export async function getToken(id: string): Promise<Token> {
+    return (
+        await client.query({
+            query: gql`
+                query {
+                    token(id: "${id}") {
+                        id,
+                        name,
+                        totalSupply,
+                        iconURL,
+                        price
+                    }
+                }
+            `
+        })
+    ).data['token']
+}
+
+export async function getTopTokens(pageId: number): Promise<Token[]> {
+    return (
+        await client.query({
+            query: gql`
+                query {
+                    getTopMarketCapTokens(pageId: ${pageId}) {
+                        id,
+                        name,
+                        totalSupply,
+                        iconURL,
+                        price
+                    }
+                }
+            `,
+            fetchPolicy: "no-cache"
+        })
+    ).data['getTopMarketCapTokens']
+}
+
 export async function login(username: string, password: string): Promise<boolean> {
     try {
         let authToken = await client.mutate({
@@ -101,16 +138,20 @@ export async function signup(username: string, password: string): Promise<boolea
 }
 
 export async function refereshToken(token: string): Promise<string> {
-    let authToken = await client.mutate({
-        mutation: gql`
-            mutation {
-                refreshToken(input: {
-                    token: "${token}"
-                })
-            }
-        `
-    });
-    return authToken.data['refreshToken'];
+    try {
+        let authToken = await client.mutate({
+            mutation: gql`
+                mutation {
+                    refreshToken(input: {
+                        token: "${token}"
+                    })
+                }
+            `
+        });
+        return authToken.data['refreshToken'];
+    } catch (e) {
+        return "";
+    }
 }
 
 export async function getExchangeRate(inToken: string, outToken: string, inAmount: number): Promise<number> {
@@ -157,4 +198,24 @@ export async function swap(inToken: string, outToken: string, inAmount: number):
     } catch (e) {
         alert(e);
     }
+}
+
+export async function getTopTradedPair(pageId: number): Promise<Pair[]> {
+    const resp = await client.query({
+        query: gql`
+            query {
+                getTopTradedPair(pageId: ${pageId}) {
+                    id,
+                    icon0,
+                    icon1,
+                    token0,
+                    token1,
+                    marketCap,
+                    totalVolumeRecorded
+                }
+            }
+        `,
+        fetchPolicy: "no-cache"
+    });
+    return resp.data['getTopTradedPair'];
 }
