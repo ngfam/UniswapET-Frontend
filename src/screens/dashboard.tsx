@@ -62,7 +62,7 @@ function Dashboard() {
             <Row style={{maxHeight: "100%"}} >
                 <Col xs={2} style={{fontSize: "22px"}} className={style['cell-border']}>
                     <div className={style['number-cell']}>
-                        {pair.id}
+                        {(10 * (pagePair - 1) + index + 1)}
                     </div>
                 </Col>
                 <Col xs={1} className={style['cell-border']}>
@@ -100,7 +100,7 @@ function Dashboard() {
             <Row style={{maxHeight: "100%"}} >
                 <Col xs={2} style={{fontSize: "22px"}} className={style['cell-border']}>
                     <div className={style['number-cell']}>
-                        {index + 1}
+                        {10 * (pageToken - 1) + index + 1}
                     </div>
                 </Col>
                 <Col xs={2} className={style['cell-border']}>
@@ -243,7 +243,7 @@ function Dashboard() {
                             <ArrowLeft className={style['arrow']} onClick={() => {setPageToken(Math.max(1, pageToken - 1))}} />
                         </Col>
                         <Col xs={1}>
-                            {pagePair}
+                            {pageToken}
                         </Col>
                         <Col xs={1} className={style['no-padding']}>
                             <ArrowRight className={style['arrow']} onClick={() => {setPageToken(pageToken + 1 )}}/>
