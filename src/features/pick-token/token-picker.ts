@@ -5,10 +5,10 @@ export const tokenSlice = createSlice({
     initialState: {
         tokens: [
             {
-                name: 'ETH',
-                id: 'ethereum',
-                iconURL: 'https://assets.coingecko.com/coins/images/279/large/ethereum.png?1595348880',
-                price: 4600
+                name: 'Tether',
+                id: 'tether',
+                iconURL: 'https://assets.coingecko.com/coins/images/325/large/Tether-logo.png?1598003707',
+                price: 1
             },
             {
                 name: 'BITCOIN',
